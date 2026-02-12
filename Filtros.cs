@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjCG
+{
+    internal class Filtros
+    {
+        internal static void buttonR(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0;
+
+                int padding = stride - (width * 3);
+
+                int red = src[2]; //aqui que vai começar a aplicar o filtro na imagem, pegando primeiro o valor inicial do vermelho
+                // Pegando como base a explicação em aula (R,G,B) onde aumenta-se somente o R, sendo assim (src++,1,1)
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        red = src[2] + 5;
+
+                        if (red > 255) //uma garantia para que nao passe do 255, pra nao dar b.o na imagem
+                            red = 255;
+
+                        src[2] = (byte)red;
+
+                        src = (src += 3);
+                    }
+                    src += padding;
+                }
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+
+        internal static void LuminanciaDMA(Bitmap imageBitmap, Bitmap imgDest)
+        {
+            int width = imageBitmap.Width;
+            int height = imageBitmap.Height;
+            int pixelSize = 3;
+            Int32 gs;
+
+            BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData bitmapDataDst = imgDest.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int padding = bitmapDataSrc.Stride - (width * pixelSize);
+
+            unsafe
+            {
+                byte* src = (byte*)bitmapDataSrc.Scan0.ToPointer();
+                byte* dst = (byte*)bitmapDataDst.Scan0.ToPointer();
+
+                int r, g, b;
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        b = *(src++);
+                        g = *(src++);
+                        r = *(src++);
+                        gs = (Int32)(r * 0.2990 + g * 0.5870 + b * 0.1140);
+                        *(dst++) = (byte)gs;
+                        *(dst++) = (byte)gs;
+                        *(dst++) = (byte)gs;
+                    }
+                    src += padding;
+                    dst += padding;
+                }
+            }
+            imageBitmap.UnlockBits(bitmapDataSrc);
+            imgDest.UnlockBits(bitmapDataDst);
+        }
+    }
+}
