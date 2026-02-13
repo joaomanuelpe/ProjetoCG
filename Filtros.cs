@@ -9,7 +9,9 @@ namespace ProjCG
 {
     internal class Filtros
     {
-        internal static void buttonR(Bitmap imgDestino)
+
+        // ---------------------------------- RGB's subtração ----------------------------
+        internal static void buttonRmenos(Bitmap imgDestino)
         {
             int width = imgDestino.Width;
             int height = imgDestino.Height;
@@ -21,7 +23,112 @@ namespace ProjCG
 
             unsafe
             {
-                byte* src = (byte*)ImgSrcdata.Scan0;
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
+
+                int padding = stride - (width * 3);
+
+                int red = src[2]; //aqui que vai começar a aplicar o filtro na imagem, pegando primeiro o valor inicial do vermelho
+                // Pegando como base a explicação em aula (R,G,B) onde asubtrai-se somente o R, sendo assim (src--,1,1)
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        red = src[2] - 1;
+
+                        if (red <= 0) //uma garantia para que nao fique abaixo do 0, pra nao dar b.o na imagem
+                            red = 0;
+
+                        src[2] = (byte)red;
+
+                        src = (src += 3);
+                    }
+                    src += padding;
+                }
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+        internal static void buttonGmenos(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
+                int padding = stride - (width * 3);
+                int green = src[1];
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        green = src[1] - 1; 
+
+                        if (green <= 0)
+                            green = 0;
+
+                        src[1] = (byte)green;
+                        src = (src += 3);
+                    }
+                    src += padding;
+                }
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+
+        internal static void buttonBmenos(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
+                int padding = stride - (width * 3);
+                int blue = src[0];
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        blue = src[0] - 1;
+
+                        if (blue <= 0)
+                            blue = 0;
+
+                        src[0] = (byte)blue;
+
+                        src = (src + 3);
+                    }
+                    src += padding;
+                }
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+
+        // ---------------------------------- RGB's adição ----------------------------
+        internal static void buttonRmais(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
 
                 int padding = stride - (width * 3);
 
@@ -47,6 +154,75 @@ namespace ProjCG
             imgDestino.UnlockBits(ImgSrcdata);
         }
 
+        internal static void buttonGmais(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
+                int padding = stride - (width * 3);
+                int green = src[1];
+                for (int y = 0; y < height; y++)
+                {
+                    for(int x = 0; x < width; x++)
+                    {
+                        green = src[1]+5;
+
+                        if (green > 255)
+                            green = 255;
+
+                        src[1] = (byte)green;
+
+                        src = (src += 3);
+                    }
+                    src += padding;
+                } 
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+
+        internal static void buttonBmais(Bitmap imgDestino)
+        {
+            int width = imgDestino.Width;
+            int height = imgDestino.Height;
+
+            BitmapData ImgSrcdata = imgDestino.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = ImgSrcdata.Stride;
+
+            unsafe
+            {
+                byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
+                int padding = stride - (width * 3);
+                int blue = src[0];
+                for(int y = 0; y < height; y++)
+                {
+                    for(int x = 0; x < width; x++)
+                    {
+                        blue = src[0] + 5;
+
+                        if (blue > 255)
+                            blue = 255;
+
+                        src[0] = (byte)blue;
+
+                        src = (src + 3);
+                    }
+                    src += padding;
+                }
+            }
+            imgDestino.UnlockBits(ImgSrcdata);
+        }
+
+        // ------------------------------ Luminancia --------------------------------
         internal static void LuminanciaDMA(Bitmap imageBitmap, Bitmap imgDest)
         {
             int width = imageBitmap.Width;

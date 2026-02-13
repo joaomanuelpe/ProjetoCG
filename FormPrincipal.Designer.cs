@@ -35,6 +35,9 @@
             btnR = new Button();
             btnG = new Button();
             btnB = new Button();
+            btnRmenos = new Button();
+            btnGmenos = new Button();
+            btnBmenos = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).BeginInit();
             SuspendLayout();
@@ -79,35 +82,70 @@
             // 
             btnR.Location = new Point(245, 539);
             btnR.Name = "btnR";
-            btnR.Size = new Size(19, 23);
+            btnR.Size = new Size(35, 23);
             btnR.TabIndex = 4;
-            btnR.Text = "R";
+            btnR.Text = "R+";
             btnR.UseVisualStyleBackColor = true;
-            btnR.Click += this.btnR_Click;
+            btnR.Click += btnR_Click;
             // 
             // btnG
             // 
-            btnG.Location = new Point(264, 539);
+            btnG.Location = new Point(278, 539);
             btnG.Name = "btnG";
-            btnG.Size = new Size(19, 23);
+            btnG.Size = new Size(34, 23);
             btnG.TabIndex = 5;
-            btnG.Text = "G";
+            btnG.Text = "G+";
             btnG.UseVisualStyleBackColor = true;
+            btnG.Click += btnG_Click;
             // 
             // btnB
             // 
-            btnB.Location = new Point(283, 539);
+            btnB.Location = new Point(310, 539);
             btnB.Name = "btnB";
-            btnB.Size = new Size(20, 23);
+            btnB.Size = new Size(38, 23);
             btnB.TabIndex = 6;
-            btnB.Text = "B";
+            btnB.Text = "B+";
             btnB.UseVisualStyleBackColor = true;
+            btnB.Click += btnB_Click;
+            // 
+            // btnRmenos
+            // 
+            btnRmenos.Location = new Point(245, 568);
+            btnRmenos.Name = "btnRmenos";
+            btnRmenos.Size = new Size(35, 23);
+            btnRmenos.TabIndex = 7;
+            btnRmenos.Text = "R-";
+            btnRmenos.UseVisualStyleBackColor = true;
+            btnRmenos.Click += btnRmenos_Click;
+            // 
+            // btnGmenos
+            // 
+            btnGmenos.Location = new Point(278, 568);
+            btnGmenos.Name = "btnGmenos";
+            btnGmenos.Size = new Size(34, 23);
+            btnGmenos.TabIndex = 8;
+            btnGmenos.Text = "G-";
+            btnGmenos.UseVisualStyleBackColor = true;
+            btnGmenos.Click += btnGmenos_Click;
+            // 
+            // btnBmenos
+            // 
+            btnBmenos.Location = new Point(310, 568);
+            btnBmenos.Name = "btnBmenos";
+            btnBmenos.Size = new Size(38, 23);
+            btnBmenos.TabIndex = 9;
+            btnBmenos.Text = "B-";
+            btnBmenos.UseVisualStyleBackColor = true;
+            btnBmenos.Click += btnBmenos_Click;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 629);
+            Controls.Add(btnBmenos);
+            Controls.Add(btnGmenos);
+            Controls.Add(btnRmenos);
             Controls.Add(btnB);
             Controls.Add(btnG);
             Controls.Add(btnR);
@@ -132,5 +170,8 @@
         private Button btnR;
         private Button btnG;
         private Button btnB;
+        private Button btnRmenos;
+        private Button btnGmenos;
+        private Button btnBmenos;
     }
 }
