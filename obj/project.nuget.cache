@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "F1fCkL8RggY=",
+  "dgSpecHash": "GdGagXP3sj8=",
   "success": true,
-  "projectFilePath": "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\ProjCG.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "G:\\ProjetoCG\\ProjCG.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bbort\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\bbort\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\bbort\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\bbort\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.24\\microsoft.netcore.app.host.win-x64.8.0.24.nupkg.sha512"
+  ],
   "logs": []
 }

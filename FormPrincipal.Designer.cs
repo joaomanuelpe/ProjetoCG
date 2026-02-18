@@ -38,8 +38,17 @@
             btnRmenos = new Button();
             btnGmenos = new Button();
             btnBmenos = new Button();
+            lbRgb = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            lbCmy = new Label();
+            label4 = new Label();
+            lbHsi = new Label();
+            tbBrilho = new TrackBar();
+            lbBrilho = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbBrilho).BeginInit();
             SuspendLayout();
             // 
             // pictureBoxOrigem
@@ -49,6 +58,7 @@
             pictureBoxOrigem.Size = new Size(571, 521);
             pictureBoxOrigem.TabIndex = 0;
             pictureBoxOrigem.TabStop = false;
+            pictureBoxOrigem.MouseMove += pictureBoxOrigem_MouseMove;
             // 
             // pictureBoxDestino
             // 
@@ -72,7 +82,7 @@
             // 
             btnLuminancia.Location = new Point(124, 539);
             btnLuminancia.Name = "btnLuminancia";
-            btnLuminancia.Size = new Size(115, 23);
+            btnLuminancia.Size = new Size(115, 25);
             btnLuminancia.TabIndex = 3;
             btnLuminancia.Text = "Luminância";
             btnLuminancia.UseVisualStyleBackColor = true;
@@ -138,11 +148,98 @@
             btnBmenos.UseVisualStyleBackColor = true;
             btnBmenos.Click += btnBmenos_Click;
             // 
+            // lbRgb
+            // 
+            lbRgb.Location = new Point(397, 539);
+            lbRgb.Name = "lbRgb";
+            lbRgb.Size = new Size(115, 15);
+            lbRgb.TabIndex = 10;
+            lbRgb.Text = "(0,0,0)";
+            lbRgb.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(359, 539);
+            label2.Name = "label2";
+            label2.Size = new Size(32, 15);
+            label2.TabIndex = 11;
+            label2.Text = "RGB";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(359, 554);
+            label1.Name = "label1";
+            label1.Size = new Size(32, 15);
+            label1.TabIndex = 13;
+            label1.Text = "CMY";
+            // 
+            // lbCmy
+            // 
+            lbCmy.Location = new Point(397, 554);
+            lbCmy.Name = "lbCmy";
+            lbCmy.Size = new Size(115, 15);
+            lbCmy.TabIndex = 12;
+            lbCmy.Text = "(0,0,0)";
+            lbCmy.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(359, 569);
+            label4.Name = "label4";
+            label4.Size = new Size(27, 15);
+            label4.TabIndex = 15;
+            label4.Text = "HSI";
+            // 
+            // lbHsi
+            // 
+            lbHsi.AutoSize = true;
+            lbHsi.Location = new Point(397, 569);
+            lbHsi.Name = "lbHsi";
+            lbHsi.Size = new Size(39, 15);
+            lbHsi.TabIndex = 14;
+            lbHsi.Text = "(0,0,0)";
+            lbHsi.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tbBrilho
+            // 
+            tbBrilho.Anchor = AnchorStyles.None;
+            tbBrilho.Location = new Point(549, 539);
+            tbBrilho.Maximum = 255;
+            tbBrilho.Name = "tbBrilho";
+            tbBrilho.Size = new Size(104, 45);
+            tbBrilho.TabIndex = 16;
+            tbBrilho.Value = 255;
+            tbBrilho.Scroll += tbBrilho_Scroll;
+            // 
+            // lbBrilho
+            // 
+            lbBrilho.AutoSize = true;
+            lbBrilho.Location = new Point(659, 547);
+            lbBrilho.Name = "lbBrilho";
+            lbBrilho.Size = new Size(25, 15);
+            lbBrilho.TabIndex = 17;
+            lbBrilho.Text = "255";
+            lbBrilho.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 629);
+            Controls.Add(lbBrilho);
+            Controls.Add(tbBrilho);
+            Controls.Add(label4);
+            Controls.Add(lbHsi);
+            Controls.Add(label1);
+            Controls.Add(lbCmy);
+            Controls.Add(label2);
+            Controls.Add(lbRgb);
             Controls.Add(btnBmenos);
             Controls.Add(btnGmenos);
             Controls.Add(btnRmenos);
@@ -157,7 +254,9 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbBrilho).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -173,5 +272,13 @@
         private Button btnRmenos;
         private Button btnGmenos;
         private Button btnBmenos;
+        private Label lbRgb;
+        private Label label2;
+        private Label label1;
+        private Label lbCmy;
+        private Label label4;
+        private Label lbHsi;
+        private TrackBar tbBrilho;
+        private Label lbBrilho;
     }
 }

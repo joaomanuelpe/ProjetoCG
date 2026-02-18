@@ -262,5 +262,46 @@ namespace ProjCG
             imageBitmap.UnlockBits(bitmapDataSrc);
             imgDest.UnlockBits(bitmapDataDst);
         }
+
+        public static Image BrilhoEspecifico(Bitmap imageBitmap, int valorBrilho)
+        {
+            int width = imageBitmap.Width;
+            int height = imageBitmap.Height;
+            int pixelSize = 3;
+            Bitmap imgDest = new Bitmap(width, height);
+
+            BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData bitmapDataDst = imgDest.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            HSI hsi = new HSI();
+            Color rgb;
+            unsafe
+            { 
+                byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
+                byte* dstBase = (byte*)bitmapDataDst.Scan0.ToPointer();
+                byte* src, dst;
+                for (int y = 0; y < height; y++)
+                {
+                    src = srcBase + y * bitmapDataSrc.Stride;
+                    dst = dstBase + y * bitmapDataDst.Stride;
+                    for (int x = 0; x < width; x++)
+                    {
+                        hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
+                        hsi.setI(valorBrilho);
+                        rgb = hsi.convertHSItoRGB();
+                        *(dst++) = rgb.B;
+                        *(dst++) = rgb.G;
+                        *(dst++) = rgb.R;
+                        src += 3;
+                    }
+                }
+            }
+            imageBitmap.UnlockBits(bitmapDataSrc);
+            imgDest.UnlockBits(bitmapDataDst);
+
+            return imgDest;
+        }
     }
 }

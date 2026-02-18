@@ -49,7 +49,7 @@ namespace ProjCG
 
         private void btnG_Click(object sender, EventArgs e)
         {
-            if(pictureBoxDestino.Image == null)
+            if (pictureBoxDestino.Image == null)
             {
                 Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
                 pictureBoxDestino.Image = (Bitmap)imgOrigem.Clone();
@@ -61,7 +61,7 @@ namespace ProjCG
 
         private void btnB_Click(object sender, EventArgs e)
         {
-            if(pictureBoxDestino.Image == null)
+            if (pictureBoxDestino.Image == null)
             {
                 Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
                 pictureBoxDestino.Image = (Bitmap)imgOrigem.Clone();
@@ -105,6 +105,43 @@ namespace ProjCG
             Bitmap imgDestino = (Bitmap)pictureBoxDestino.Image;
             Filtros.buttonBmenos(imgDestino);
             pictureBoxDestino.Refresh();
+        }
+
+        private void pictureBoxOrigem_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap bmp = (Bitmap)pictureBoxOrigem.Image;
+                if (e.X >= 0 && e.X < bmp.Width && e.Y >= 0 && e.Y < bmp.Height)
+                {
+                    Color cor = bmp.GetPixel(e.X, e.Y);
+                    lbRgb.Text = "(" + cor.R + "," + cor.G + "," + cor.B + ")";
+                    HSI hsi = new HSI();
+                    hsi.convertRGBtoHSI(cor);
+                    lbHsi.Text = "(" + hsi.getH() + "," + hsi.getS() + "," + hsi.getI() + ")";
+
+                }
+            }
+            else
+            {
+                lbRgb.Text = "(255,255,255)";
+                lbCmy.Text = "(255,255,255)";
+                lbHsi.Text = "(255,255,255)";
+            }
+
+        }
+
+        private void tbBrilho_Scroll(object sender, EventArgs e)
+        {
+            int valorBrilho = tbBrilho.Value;
+            lbBrilho.Text = "" + valorBrilho;
+            if (pictureBoxDestino.Image == null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxDestino.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+            }
+
         }
     }
 }

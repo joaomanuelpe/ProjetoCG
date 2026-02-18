@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\ProjCG.csproj": {}
+    "G:\\ProjetoCG\\ProjCG.csproj": {}
   },
   "projects": {
-    "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\ProjCG.csproj": {
+    "G:\\ProjetoCG\\ProjCG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\ProjCG.csproj",
+        "projectUniqueName": "G:\\ProjetoCG\\ProjCG.csproj",
         "projectName": "ProjCG",
-        "projectPath": "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\ProjCG.csproj",
-        "packagesPath": "C:\\Users\\victo\\.nuget\\packages\\",
-        "outputPath": "D:\\MInhas coisas\\Faculdade\\Computação Gráfica\\1º Bimestre\\ProjetoCG\\obj\\",
+        "projectPath": "G:\\ProjetoCG\\ProjCG.csproj",
+        "packagesPath": "C:\\Users\\bbort\\.nuget\\packages\\",
+        "outputPath": "G:\\ProjetoCG\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\victo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\bbort\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,6 +56,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
