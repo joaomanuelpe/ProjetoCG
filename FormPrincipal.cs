@@ -21,6 +21,7 @@ namespace ProjCG
                 image = Image.FromFile(openFileDialog.FileName);
                 pictureBoxOrigem.Image = image;
                 pictureBoxOrigem.SizeMode = PictureBoxSizeMode.Normal;
+                
             }
             if (pictureBoxDestino.Image != null) //verifica se tem imagem na outra tela, se houver, retira ela
                 pictureBoxDestino.Image = null;
@@ -120,6 +121,9 @@ namespace ProjCG
                     HSI hsi = new HSI();
                     hsi.convertRGBtoHSI(cor);
                     lbHsi.Text = "(" + hsi.getH() + "," + hsi.getS() + "," + hsi.getI() + ")";
+                    CMYK cmyk = new CMYK();
+                    cmyk.convertRGBtoCMYK(cor);
+                    lbCmy.Text = "(" + (int)(cmyk.GetC()*100) + "," + (int)(cmyk.GetM() * 100) + "," + (int)(cmyk.GetY() * 100) + ")";
 
                 }
             }
@@ -136,10 +140,10 @@ namespace ProjCG
         {
             int valorBrilho = tbBrilho.Value;
             lbBrilho.Text = "" + valorBrilho;
-            if (pictureBoxDestino.Image == null)
+            if (pictureBoxOrigem.Image != null)
             {
-                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
-                pictureBoxDestino.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+                Bitmap imgOrigem = (Bitmap)image;
+                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
             }
 
         }

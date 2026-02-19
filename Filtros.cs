@@ -277,6 +277,7 @@ namespace ProjCG
 
             HSI hsi = new HSI();
             Color rgb;
+            int r, g, b;
             unsafe
             { 
                 byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
@@ -288,13 +289,17 @@ namespace ProjCG
                     dst = dstBase + y * bitmapDataDst.Stride;
                     for (int x = 0; x < width; x++)
                     {
-                        hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
+                        b = *(src++);
+                        g = *(src++);
+                        r = *(src++);
+                        //hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
+                        hsi.convertRGBtoHSI(r,g,b);
                         hsi.setI(valorBrilho);
                         rgb = hsi.convertHSItoRGB();
                         *(dst++) = rgb.B;
                         *(dst++) = rgb.G;
                         *(dst++) = rgb.R;
-                        src += 3;
+                        
                     }
                 }
             }

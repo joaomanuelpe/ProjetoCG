@@ -69,9 +69,9 @@ namespace ProjCG
             result = result * 180 / Math.PI; // Converte para graus
 
             if (b > g)
-                return (int)(360 - result + 0.5);
+                return (int)(360 - result);
             else
-                return (int)(result + 0.5);
+                return (int)(result);
         }
 
         public Color convertHSItoRGB()
