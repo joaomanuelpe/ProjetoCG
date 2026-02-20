@@ -46,6 +46,10 @@
             lbHsi = new Label();
             tbBrilho = new TrackBar();
             lbBrilho = new Label();
+            btImagemOriginal = new Button();
+            btDiminuiI = new Button();
+            btAumentaI = new Button();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbBrilho).BeginInit();
@@ -150,9 +154,10 @@
             // 
             // lbRgb
             // 
+            lbRgb.AutoSize = true;
             lbRgb.Location = new Point(397, 539);
             lbRgb.Name = "lbRgb";
-            lbRgb.Size = new Size(115, 15);
+            lbRgb.Size = new Size(39, 15);
             lbRgb.TabIndex = 10;
             lbRgb.Text = "(0,0,0)";
             lbRgb.TextAlign = ContentAlignment.MiddleCenter;
@@ -179,9 +184,10 @@
             // 
             // lbCmy
             // 
+            lbCmy.AutoSize = true;
             lbCmy.Location = new Point(397, 554);
             lbCmy.Name = "lbCmy";
-            lbCmy.Size = new Size(115, 15);
+            lbCmy.Size = new Size(39, 15);
             lbCmy.TabIndex = 12;
             lbCmy.Text = "(0,0,0)";
             lbCmy.TextAlign = ContentAlignment.MiddleCenter;
@@ -209,29 +215,74 @@
             // tbBrilho
             // 
             tbBrilho.Anchor = AnchorStyles.None;
-            tbBrilho.Location = new Point(549, 539);
-            tbBrilho.Maximum = 255;
+            tbBrilho.Location = new Point(586, 554);
+            tbBrilho.Maximum = 100;
             tbBrilho.Name = "tbBrilho";
             tbBrilho.Size = new Size(104, 45);
             tbBrilho.TabIndex = 16;
-            tbBrilho.Value = 255;
+            tbBrilho.Value = 10;
             tbBrilho.Scroll += tbBrilho_Scroll;
             // 
             // lbBrilho
             // 
             lbBrilho.AutoSize = true;
-            lbBrilho.Location = new Point(659, 547);
+            lbBrilho.Location = new Point(696, 562);
             lbBrilho.Name = "lbBrilho";
-            lbBrilho.Size = new Size(25, 15);
+            lbBrilho.Size = new Size(19, 15);
             lbBrilho.TabIndex = 17;
-            lbBrilho.Text = "255";
+            lbBrilho.Text = "10";
             lbBrilho.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btImagemOriginal
+            // 
+            btImagemOriginal.Location = new Point(12, 570);
+            btImagemOriginal.Name = "btImagemOriginal";
+            btImagemOriginal.Size = new Size(106, 23);
+            btImagemOriginal.TabIndex = 18;
+            btImagemOriginal.Text = "Imagem Original";
+            btImagemOriginal.UseVisualStyleBackColor = true;
+            btImagemOriginal.Click += btImagemOriginal_Click;
+            // 
+            // btDiminuiI
+            // 
+            btDiminuiI.Location = new Point(504, 563);
+            btDiminuiI.Name = "btDiminuiI";
+            btDiminuiI.Size = new Size(50, 23);
+            btDiminuiI.TabIndex = 20;
+            btDiminuiI.Text = "I-";
+            btDiminuiI.UseVisualStyleBackColor = true;
+            btDiminuiI.Click += btDiminuiI_Click;
+            // 
+            // btAumentaI
+            // 
+            btAumentaI.AutoSize = true;
+            btAumentaI.Location = new Point(504, 534);
+            btAumentaI.Name = "btAumentaI";
+            btAumentaI.Size = new Size(50, 25);
+            btAumentaI.TabIndex = 19;
+            btAumentaI.Text = "I+";
+            btAumentaI.UseVisualStyleBackColor = true;
+            btAumentaI.Click += btAumentaI_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(566, 536);
+            label3.Name = "label3";
+            label3.Size = new Size(155, 15);
+            label3.TabIndex = 21;
+            label3.Text = "Porcentagem para alteracao";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 629);
+            Controls.Add(label3);
+            Controls.Add(btDiminuiI);
+            Controls.Add(btAumentaI);
+            Controls.Add(btImagemOriginal);
             Controls.Add(lbBrilho);
             Controls.Add(tbBrilho);
             Controls.Add(label4);
@@ -280,5 +331,9 @@
         private Label lbHsi;
         private TrackBar tbBrilho;
         private Label lbBrilho;
+        private Button btImagemOriginal;
+        private Button btDiminuiI;
+        private Button btAumentaI;
+        private Label label3;
     }
 }

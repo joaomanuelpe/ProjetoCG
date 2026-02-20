@@ -294,7 +294,7 @@ namespace ProjCG
                         r = *(src++);
                         //hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
                         hsi.convertRGBtoHSI(r,g,b);
-                        hsi.setI(valorBrilho);
+                        hsi.setI((int)(hsi.getI()*(1+valorBrilho/100.0)));
                         rgb = hsi.convertHSItoRGB();
                         *(dst++) = rgb.B;
                         *(dst++) = rgb.G;

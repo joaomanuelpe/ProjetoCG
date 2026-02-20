@@ -21,7 +21,7 @@ namespace ProjCG
                 image = Image.FromFile(openFileDialog.FileName);
                 pictureBoxOrigem.Image = image;
                 pictureBoxOrigem.SizeMode = PictureBoxSizeMode.Normal;
-                
+
             }
             if (pictureBoxDestino.Image != null) //verifica se tem imagem na outra tela, se houver, retira ela
                 pictureBoxDestino.Image = null;
@@ -123,7 +123,7 @@ namespace ProjCG
                     lbHsi.Text = "(" + hsi.getH() + "," + hsi.getS() + "," + hsi.getI() + ")";
                     CMYK cmyk = new CMYK();
                     cmyk.convertRGBtoCMYK(cor);
-                    lbCmy.Text = "(" + (int)(cmyk.GetC()*100) + "," + (int)(cmyk.GetM() * 100) + "," + (int)(cmyk.GetY() * 100) + ")";
+                    lbCmy.Text = "(" + (int)(cmyk.GetC() * 100) + "," + (int)(cmyk.GetM() * 100) + "," + (int)(cmyk.GetY() * 100) + ")";
 
                 }
             }
@@ -140,12 +140,38 @@ namespace ProjCG
         {
             int valorBrilho = tbBrilho.Value;
             lbBrilho.Text = "" + valorBrilho;
-            if (pictureBoxOrigem.Image != null)
-            {
-                Bitmap imgOrigem = (Bitmap)image;
-                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
-            }
+
 
         }
+
+        private void btImagemOriginal_Click(object sender, EventArgs e)
+        {
+            if (image != null)
+                pictureBoxOrigem.Image = image;
+        }
+
+        private void btDiminuiI_Click(object sender, EventArgs e)
+        {
+            int valorBrilho = tbBrilho.Value * -1;
+
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+            }
+        }
+
+        private void btAumentaI_Click(object sender, EventArgs e)
+        {
+            int valorBrilho = tbBrilho.Value;
+
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+            }
+        }
+
+    
     }
 }
