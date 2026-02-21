@@ -263,11 +263,11 @@ namespace ProjCG
             imgDest.UnlockBits(bitmapDataDst);
         }
 
-        public static Image BrilhoEspecifico(Bitmap imageBitmap, int valorBrilho)
+        public static Image BrilhoEspecifico(Bitmap imageBitmap, int valorBrilho, HSI[][] imagemHSI)
         {
             int width = imageBitmap.Width;
             int height = imageBitmap.Height;
-            int pixelSize = 3;
+            
             Bitmap imgDest = new Bitmap(width, height);
 
             BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
@@ -275,7 +275,7 @@ namespace ProjCG
             BitmapData bitmapDataDst = imgDest.LockBits(new Rectangle(0, 0, width, height),
                 ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
-            HSI hsi = new HSI();
+            HSI hsi;
             Color rgb;
             int r, g, b;
             unsafe
@@ -289,13 +289,14 @@ namespace ProjCG
                     dst = dstBase + y * bitmapDataDst.Stride;
                     for (int x = 0; x < width; x++)
                     {
-                        b = *(src++);
-                        g = *(src++);
-                        r = *(src++);
-                        //hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
-                        hsi.convertRGBtoHSI(r,g,b);
-                        hsi.setI((int)(hsi.getI()*(1+valorBrilho/100.0)));
+                       hsi= imagemHSI[y][x];
+                        int i = (int)(hsi.getI() + 255 * valorBrilho / 100.0);
+                        if(i > 255)
+                            hsi.setI(255);
+                        else if (i < 0)
+                            hsi.setI(0);
                         rgb = hsi.convertHSItoRGB();
+                        hsi.setI(i);
                         *(dst++) = rgb.B;
                         *(dst++) = rgb.G;
                         *(dst++) = rgb.R;
@@ -307,6 +308,48 @@ namespace ProjCG
             imgDest.UnlockBits(bitmapDataDst);
 
             return imgDest;
+        }
+
+        public static HSI[][] ConverterRGBparaHSI(Bitmap imageBitmap)
+        {
+            int width = imageBitmap.Width;
+            int height = imageBitmap.Height;
+           
+            HSI[][] hsiImagem = new HSI[height][];
+
+            BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+           
+
+            HSI hsi ;
+           
+            int r, g, b;
+            unsafe
+            {
+                byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
+               
+                byte* src;
+                for (int y = 0; y < height; y++)
+                {
+                    src = srcBase + y * bitmapDataSrc.Stride;
+                    hsiImagem[y] = new HSI[width];
+                    for (int x = 0; x < width; x++)
+                    {
+                        hsi = new HSI();
+                        b = *(src++);
+                        g = *(src++);
+                        r = *(src++);
+                        //hsi.convertRGBtoHSI(*(src+2), *(src + 1),*src);
+                        hsi.convertRGBtoHSI(r, g, b);
+                        hsiImagem[y][x] = hsi;
+
+
+                    }
+                }
+            }
+            imageBitmap.UnlockBits(bitmapDataSrc);
+           
+            return hsiImagem;
         }
     }
 }

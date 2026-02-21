@@ -6,6 +6,7 @@ namespace ProjCG
     {
         private Image image;
         private Bitmap imageBitmap;
+        private HSI[][] imagemHSI;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace ProjCG
                 image = Image.FromFile(openFileDialog.FileName);
                 pictureBoxOrigem.Image = image;
                 pictureBoxOrigem.SizeMode = PictureBoxSizeMode.Normal;
-
+                imagemHSI = Filtros.ConverterRGBparaHSI((Bitmap)image);
             }
             if (pictureBoxDestino.Image != null) //verifica se tem imagem na outra tela, se houver, retira ela
                 pictureBoxDestino.Image = null;
@@ -157,7 +158,7 @@ namespace ProjCG
             if (pictureBoxOrigem.Image != null)
             {
                 Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
-                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho, imagemHSI);
             }
         }
 
@@ -168,7 +169,7 @@ namespace ProjCG
             if (pictureBoxOrigem.Image != null)
             {
                 Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
-                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho);
+                pictureBoxOrigem.Image = Filtros.BrilhoEspecifico(imgOrigem, valorBrilho, imagemHSI);
             }
         }
 
