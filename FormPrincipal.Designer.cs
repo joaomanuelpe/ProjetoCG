@@ -32,12 +32,6 @@
             pictureBoxDestino = new PictureBox();
             btnAbirImg = new Button();
             btnLuminancia = new Button();
-            btnR = new Button();
-            btnG = new Button();
-            btnB = new Button();
-            btnRmenos = new Button();
-            btnGmenos = new Button();
-            btnBmenos = new Button();
             lbRgb = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -96,66 +90,6 @@
             btnLuminancia.Text = "Luminância";
             btnLuminancia.UseVisualStyleBackColor = true;
             btnLuminancia.Click += btnLuminancia_Click;
-            // 
-            // btnR
-            // 
-            btnR.Location = new Point(245, 539);
-            btnR.Name = "btnR";
-            btnR.Size = new Size(35, 23);
-            btnR.TabIndex = 4;
-            btnR.Text = "R+";
-            btnR.UseVisualStyleBackColor = true;
-            btnR.Click += btnR_Click;
-            // 
-            // btnG
-            // 
-            btnG.Location = new Point(278, 539);
-            btnG.Name = "btnG";
-            btnG.Size = new Size(34, 23);
-            btnG.TabIndex = 5;
-            btnG.Text = "G+";
-            btnG.UseVisualStyleBackColor = true;
-            btnG.Click += btnG_Click;
-            // 
-            // btnB
-            // 
-            btnB.Location = new Point(310, 539);
-            btnB.Name = "btnB";
-            btnB.Size = new Size(38, 23);
-            btnB.TabIndex = 6;
-            btnB.Text = "B+";
-            btnB.UseVisualStyleBackColor = true;
-            btnB.Click += btnB_Click;
-            // 
-            // btnRmenos
-            // 
-            btnRmenos.Location = new Point(245, 568);
-            btnRmenos.Name = "btnRmenos";
-            btnRmenos.Size = new Size(35, 23);
-            btnRmenos.TabIndex = 7;
-            btnRmenos.Text = "R-";
-            btnRmenos.UseVisualStyleBackColor = true;
-            btnRmenos.Click += btnRmenos_Click;
-            // 
-            // btnGmenos
-            // 
-            btnGmenos.Location = new Point(278, 568);
-            btnGmenos.Name = "btnGmenos";
-            btnGmenos.Size = new Size(34, 23);
-            btnGmenos.TabIndex = 8;
-            btnGmenos.Text = "G-";
-            btnGmenos.UseVisualStyleBackColor = true;
-            btnGmenos.Click += btnGmenos_Click;
-            // 
-            // btnBmenos
-            // 
-            btnBmenos.Location = new Point(310, 568);
-            btnBmenos.Name = "btnBmenos";
-            btnBmenos.Size = new Size(38, 23);
-            btnBmenos.TabIndex = 9;
-            btnBmenos.Text = "B-";
-            btnBmenos.UseVisualStyleBackColor = true;
-            btnBmenos.Click += btnBmenos_Click;
             // 
             // lbRgb
             // 
@@ -240,7 +174,7 @@
             // 
             // btImagemOriginal
             // 
-            btImagemOriginal.Location = new Point(12, 570);
+            btImagemOriginal.Location = new Point(245, 541);
             btImagemOriginal.Name = "btImagemOriginal";
             btImagemOriginal.Size = new Size(106, 23);
             btImagemOriginal.TabIndex = 18;
@@ -336,12 +270,6 @@
             Controls.Add(lbCmy);
             Controls.Add(label2);
             Controls.Add(lbRgb);
-            Controls.Add(btnBmenos);
-            Controls.Add(btnGmenos);
-            Controls.Add(btnRmenos);
-            Controls.Add(btnB);
-            Controls.Add(btnG);
-            Controls.Add(btnR);
             Controls.Add(btnLuminancia);
             Controls.Add(btnAbirImg);
             Controls.Add(pictureBoxDestino);
@@ -365,12 +293,6 @@
         private PictureBox pictureBoxDestino;
         private Button btnAbirImg;
         private Button btnLuminancia;
-        private Button btnR;
-        private Button btnG;
-        private Button btnB;
-        private Button btnRmenos;
-        private Button btnGmenos;
-        private Button btnBmenos;
         private Label lbRgb;
         private Label label2;
         private Label label1;
