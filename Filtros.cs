@@ -67,7 +67,7 @@ namespace ProjCG
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        green = src[1] - 1; 
+                        green = src[1] - 1;
 
                         if (green <= 0)
                             green = 0;
@@ -171,9 +171,9 @@ namespace ProjCG
                 int green = src[1];
                 for (int y = 0; y < height; y++)
                 {
-                    for(int x = 0; x < width; x++)
+                    for (int x = 0; x < width; x++)
                     {
-                        green = src[1]+5;
+                        green = src[1] + 5;
 
                         if (green > 255)
                             green = 255;
@@ -183,7 +183,7 @@ namespace ProjCG
                         src = (src += 3);
                     }
                     src += padding;
-                } 
+                }
             }
             imgDestino.UnlockBits(ImgSrcdata);
         }
@@ -203,9 +203,9 @@ namespace ProjCG
                 byte* src = (byte*)ImgSrcdata.Scan0.ToPointer();
                 int padding = stride - (width * 3);
                 int blue = src[0];
-                for(int y = 0; y < height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    for(int x = 0; x < width; x++)
+                    for (int x = 0; x < width; x++)
                     {
                         blue = src[0] + 5;
 
@@ -267,7 +267,7 @@ namespace ProjCG
         {
             int width = imageBitmap.Width;
             int height = imageBitmap.Height;
-            
+
             Bitmap imgDest = new Bitmap(width, height);
 
             BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
@@ -279,7 +279,7 @@ namespace ProjCG
             Color rgb;
             int r, g, b;
             unsafe
-            { 
+            {
                 byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
                 byte* dstBase = (byte*)bitmapDataDst.Scan0.ToPointer();
                 byte* src, dst;
@@ -289,9 +289,9 @@ namespace ProjCG
                     dst = dstBase + y * bitmapDataDst.Stride;
                     for (int x = 0; x < width; x++)
                     {
-                       hsi= imagemHSI[y][x];
+                        hsi = imagemHSI[y][x];
                         int i = (int)(hsi.getI() + 255 * valorBrilho / 100.0);
-                        if(i > 255)
+                        if (i > 255)
                             hsi.setI(255);
                         else if (i < 0)
                             hsi.setI(0);
@@ -300,7 +300,7 @@ namespace ProjCG
                         *(dst++) = rgb.B;
                         *(dst++) = rgb.G;
                         *(dst++) = rgb.R;
-                        
+
                     }
                 }
             }
@@ -314,20 +314,20 @@ namespace ProjCG
         {
             int width = imageBitmap.Width;
             int height = imageBitmap.Height;
-           
+
             HSI[][] hsiImagem = new HSI[height][];
 
             BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
                 ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-           
 
-            HSI hsi ;
-           
+
+            HSI hsi;
+
             int r, g, b;
             unsafe
             {
                 byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
-               
+
                 byte* src;
                 for (int y = 0; y < height; y++)
                 {
@@ -348,8 +348,80 @@ namespace ProjCG
                 }
             }
             imageBitmap.UnlockBits(bitmapDataSrc);
-           
+
             return hsiImagem;
+        }
+
+        public static Bitmap ajustarHSI(Bitmap img, int deltaH, float fatorI)
+        {
+            int width = img.Width;
+            int height = img.Height;
+
+            Bitmap imgDest = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            BitmapData srcData = img.LockBits(
+                new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format24bppRgb);
+
+            BitmapData dstData = imgDest.LockBits(
+                new Rectangle(0, 0, width, height),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format24bppRgb);
+
+            int strideSrc = srcData.Stride;
+            int strideDst = dstData.Stride;
+
+            HSI hsi = new HSI();
+
+            unsafe
+            {
+                byte* ptrSrc = (byte*)srcData.Scan0;
+                byte* ptrDst = (byte*)dstData.Scan0;
+
+                for (int y = 0; y < height; y++)
+                {
+                    byte* rowSrc = ptrSrc + y * strideSrc;
+                    byte* rowDst = ptrDst + y * strideDst;
+
+                    for (int x = 0; x < width; x++)
+                    {
+                        byte b = rowSrc[x * 3];
+                        byte g = rowSrc[x * 3 + 1];
+                        byte r = rowSrc[x * 3 + 2];
+
+                        hsi.convertRGBtoHSI(r, g, b);
+                        //ajusta hue
+                        int novoH = hsi.getH() + deltaH;
+
+                        if (novoH < 0)
+                            novoH += 360;
+                        if (novoH >= 360)
+                            novoH -= 360;
+
+                        hsi.setH(novoH);
+
+                        //ajusta i
+                        int novoI = (int)(hsi.getI() * fatorI);
+
+                        if (novoI < 0)
+                            novoI = 0;
+                        if (novoI > 255)
+                            novoI = 255;
+                        hsi.setI(novoI);
+                        Color novaCor = hsi.convertHSItoRGB();
+
+                        rowDst[x * 3] = novaCor.B;
+                        rowDst[x * 3 + 1] = novaCor.G;
+                        rowDst[x * 3 + 2] = novaCor.R;
+                    }
+                }
+            }
+
+            img.UnlockBits(srcData);
+            imgDest.UnlockBits(dstData);
+
+            return imgDest;
         }
     }
 }

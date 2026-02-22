@@ -173,6 +173,24 @@ namespace ProjCG
             }
         }
 
-    
+        private void btnAumentarI40_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxDestino.Image = Filtros.ajustarHSI(imgOrigem, 0, 1.4f);
+            }
+        }
+
+        private void btnAumentarHue30_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxDestino.Image = Filtros.ajustarHSI(imgOrigem, 30, 1.0f);
+            }
+        }
+
+
     }
 }

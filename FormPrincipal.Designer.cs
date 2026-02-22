@@ -274,6 +274,28 @@
             label3.Text = "Porcentagem para alteracao";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btnAumentarI40
+            // 
+            btnAumentarI40 = new Button();
+            btnAumentarI40.Location = new Point(750, 534);
+            btnAumentarI40.Name = "btnAumentarI40";
+            btnAumentarI40.Size = new Size(130, 25);
+            btnAumentarI40.TabIndex = 22;
+            btnAumentarI40.Text = "Aumentar I 40%";
+            btnAumentarI40.UseVisualStyleBackColor = true;
+            btnAumentarI40.Click += btnAumentarI40_Click;
+            // 
+            // btnAumentarHue30
+            // 
+            btnAumentarHue30 = new Button();
+            btnAumentarHue30.Location = new Point(750, 563);
+            btnAumentarHue30.Name = "btnAumentarHue30";
+            btnAumentarHue30.Size = new Size(130, 25);
+            btnAumentarHue30.TabIndex = 23;
+            btnAumentarHue30.Text = "Aumentar Hue 30°";
+            btnAumentarHue30.UseVisualStyleBackColor = true;
+            btnAumentarHue30.Click += btnAumentarHue30_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -301,6 +323,8 @@
             Controls.Add(btnAbirImg);
             Controls.Add(pictureBoxDestino);
             Controls.Add(pictureBoxOrigem);
+            Controls.Add(btnAumentarI40);
+            Controls.Add(btnAumentarHue30);
             Name = "FormPrincipal";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).EndInit();
@@ -335,5 +359,7 @@
         private Button btDiminuiI;
         private Button btAumentaI;
         private Label label3;
+        private Button btnAumentarI40;
+        private Button btnAumentarHue30;
     }
 }
