@@ -191,6 +191,15 @@ namespace ProjCG
             }
         }
 
-
+        private void btnSegHUE_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxOrigem.Image != null)
+            {
+                int num = (int)numericUpDownHue.Value;
+                double tolerancia = 15.0; //seria uma tolerancia para aceitar quantidade de graus pra mais ou menos da imagem
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxOrigem.Image = Filtros.SegmentarHUE(imgOrigem, num, tolerancia, imagemHSI);
+            }
+        }
     }
 }

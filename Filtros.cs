@@ -423,5 +423,68 @@ namespace ProjCG
 
             return imgDest;
         }
+
+        // ---------------------------- Segmentar pelo HUE ---------------------
+        public static Bitmap SegmentarHUE(Bitmap imageBitmap, double hueAlvo, double tolerancia, HSI[][] imagemHSI)
+        {
+            int width = imageBitmap.Width;
+            int height = imageBitmap.Height;
+            Bitmap imgDest = new Bitmap(width, height);
+
+            BitmapData bitmapDataSrc = imageBitmap.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData bitmapDataDst = imgDest.LockBits(new Rectangle(0, 0, width, height),
+                ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+
+            unsafe
+            {
+                byte* srcBase = (byte*)bitmapDataSrc.Scan0.ToPointer();
+                byte* dstBase = (byte*)bitmapDataDst.Scan0.ToPointer();
+                byte* src, dst;
+
+                for (int y = 0; y < height; y++)
+                {
+                    src = srcBase + y * bitmapDataSrc.Stride;
+                    dst = dstBase + y * bitmapDataDst.Stride;
+
+                    for (int x = 0; x < width; x++)
+                    {
+                        byte b = *(src++);
+                        byte g = *(src++);
+                        byte r = *(src++);
+
+                        // pega o hue da matriz ja pre calculado
+                        HSI hsi = imagemHSI[y][x];
+                        double pixelH = hsi.getH();
+
+                        // faz o calculo do circulo
+                        double diferenca = Math.Abs(pixelH - hueAlvo);
+                        if (diferenca > 180)
+                            diferenca = 360 - diferenca;
+
+                        // Se a cor especificada estiver na imagem, copa o RGB original para o destino
+                        if (diferenca <= tolerancia)
+                        {
+                            *(dst++) = b;
+                            *(dst++) = g;
+                            *(dst++) = r;
+                        }
+                        else
+                        {
+                            // Aqui faz a luminancia pro local da imagem na qual nao corresponde com o RGB daquele determinado grau solicitado
+                            byte cinza = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
+                            *(dst++) = cinza;
+                            *(dst++) = cinza;
+                            *(dst++) = cinza;
+                        }
+                    }
+                }
+            }
+            imageBitmap.UnlockBits(bitmapDataSrc);
+            imgDest.UnlockBits(bitmapDataDst);
+
+            return imgDest;
+        }
+
     }
 }

@@ -50,9 +50,14 @@
             btDiminuiI = new Button();
             btAumentaI = new Button();
             label3 = new Label();
+            btnAumentarI40 = new Button();
+            btnAumentarHue30 = new Button();
+            btnSegHUE = new Button();
+            numericUpDownHue = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbBrilho).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHue).BeginInit();
             SuspendLayout();
             // 
             // pictureBoxOrigem
@@ -276,7 +281,6 @@
             // 
             // btnAumentarI40
             // 
-            btnAumentarI40 = new Button();
             btnAumentarI40.Location = new Point(750, 534);
             btnAumentarI40.Name = "btnAumentarI40";
             btnAumentarI40.Size = new Size(130, 25);
@@ -287,7 +291,6 @@
             // 
             // btnAumentarHue30
             // 
-            btnAumentarHue30 = new Button();
             btnAumentarHue30.Location = new Point(750, 563);
             btnAumentarHue30.Name = "btnAumentarHue30";
             btnAumentarHue30.Size = new Size(130, 25);
@@ -296,11 +299,31 @@
             btnAumentarHue30.UseVisualStyleBackColor = true;
             btnAumentarHue30.Click += btnAumentarHue30_Click;
             // 
+            // btnSegHUE
+            // 
+            btnSegHUE.Location = new Point(899, 565);
+            btnSegHUE.Name = "btnSegHUE";
+            btnSegHUE.Size = new Size(120, 23);
+            btnSegHUE.TabIndex = 24;
+            btnSegHUE.Text = "Segmentar HUE";
+            btnSegHUE.UseVisualStyleBackColor = true;
+            btnSegHUE.Click += btnSegHUE_Click;
+            // 
+            // numericUpDownHue
+            // 
+            numericUpDownHue.Location = new Point(899, 537);
+            numericUpDownHue.Maximum = new decimal(new int[] { 360, 0, 0, 0 });
+            numericUpDownHue.Name = "numericUpDownHue";
+            numericUpDownHue.Size = new Size(120, 23);
+            numericUpDownHue.TabIndex = 25;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 629);
+            Controls.Add(numericUpDownHue);
+            Controls.Add(btnSegHUE);
             Controls.Add(label3);
             Controls.Add(btDiminuiI);
             Controls.Add(btAumentaI);
@@ -330,6 +353,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbBrilho).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHue).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -361,5 +385,7 @@
         private Label label3;
         private Button btnAumentarI40;
         private Button btnAumentarHue30;
+        private Button btnSegHUE;
+        private NumericUpDown numericUpDownHue;
     }
 }
