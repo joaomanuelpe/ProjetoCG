@@ -212,7 +212,7 @@ namespace ProjCG
         }
 
         // ---------------------------- Segmentar pelo HUE ---------------------
-        public static Bitmap SegmentarHUE(Bitmap imageBitmap, double hueAlvo, double tolerancia, HSI[][] imagemHSI)
+        public static Image SegmentarHUE(Bitmap imageBitmap, int hue1, int hue2, HSI[][] imagemHSI)
         {
             int width = imageBitmap.Width;
             int height = imageBitmap.Height;
@@ -240,29 +240,39 @@ namespace ProjCG
                         byte g = *(src++);
                         byte r = *(src++);
 
-                        // pega o hue da matriz ja pre calculado
+                        // Pega o Hue da matriz já calculada
                         HSI hsi = imagemHSI[y][x];
                         double pixelH = hsi.getH();
 
-                        // faz o calculo do circulo
-                        double diferenca = Math.Abs(pixelH - hueAlvo);
-                        if (diferenca > 180)
-                            diferenca = 360 - diferenca;
+                        bool manterColorido = false;
 
-                        // Se a cor especificada estiver na imagem, copa o RGB original para o destino
-                        if (diferenca <= tolerancia)
+                        if (hue1 <= hue2)  // Verifico se o intervalo está normal que foi colocado, é aquela cor em especifico, e a flag de false vai pra true
+                        {
+                            if (pixelH >= hue1 && pixelH <= hue2)
+                                manterColorido = true;
+                        }
+
+                        else // Mesmo sentido, se caso for invertido, matenha a cor
+                        {
+                            if (pixelH >= hue1 || pixelH <= hue2)
+                                manterColorido = true;
+                        }
+                                
+
+                        //Aqui vai ver se faz a luminancia ou matem a cor
+                        if (manterColorido)
                         {
                             *(dst++) = b;
                             *(dst++) = g;
                             *(dst++) = r;
                         }
-                        else
-                        {
-                            // Aqui faz a luminancia pro local da imagem na qual nao corresponde com o RGB daquele determinado grau solicitado
+                        else 
+                        { 
                             byte cinza = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
-                            *(dst++) = cinza;
-                            *(dst++) = cinza;
-                            *(dst++) = cinza;
+
+                            *(dst++) = cinza; // B
+                            *(dst++) = cinza; // G
+                            *(dst++) = cinza; // R
                         }
                     }
                 }

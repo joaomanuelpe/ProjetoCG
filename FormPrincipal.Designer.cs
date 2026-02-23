@@ -48,10 +48,12 @@
             btnAumentarHue30 = new Button();
             btnSegHUE = new Button();
             numericUpDownHue = new NumericUpDown();
+            numericUpDownHue2 = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbBrilho).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHue2).BeginInit();
             SuspendLayout();
             // 
             // pictureBoxOrigem
@@ -248,14 +250,23 @@
             numericUpDownHue.Location = new Point(899, 537);
             numericUpDownHue.Maximum = new decimal(new int[] { 360, 0, 0, 0 });
             numericUpDownHue.Name = "numericUpDownHue";
-            numericUpDownHue.Size = new Size(120, 23);
+            numericUpDownHue.Size = new Size(52, 23);
             numericUpDownHue.TabIndex = 25;
+            // 
+            // numericUpDownHue2
+            // 
+            numericUpDownHue2.Location = new Point(964, 536);
+            numericUpDownHue2.Maximum = new decimal(new int[] { 360, 0, 0, 0 });
+            numericUpDownHue2.Name = "numericUpDownHue2";
+            numericUpDownHue2.Size = new Size(52, 23);
+            numericUpDownHue2.TabIndex = 26;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 629);
+            Controls.Add(numericUpDownHue2);
             Controls.Add(numericUpDownHue);
             Controls.Add(btnSegHUE);
             Controls.Add(label3);
@@ -282,6 +293,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxDestino).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbBrilho).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownHue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHue2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,5 +321,6 @@
         private Button btnAumentarHue30;
         private Button btnSegHUE;
         private NumericUpDown numericUpDownHue;
+        private NumericUpDown numericUpDownHue2;
     }
 }
