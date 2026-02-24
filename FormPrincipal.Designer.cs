@@ -44,8 +44,8 @@
             btDiminuiI = new Button();
             btAumentaI = new Button();
             label3 = new Label();
-            btnAumentarI40 = new Button();
             btnAumentarHue30 = new Button();
+            btnDiminuirHue30 = new Button();
             btnSegHUE = new Button();
             numericUpDownHue = new NumericUpDown();
             numericUpDownHue2 = new NumericUpDown();
@@ -215,25 +215,25 @@
             label3.Text = "Porcentagem para alteracao";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btnAumentarI40
+            // btnAumentarH30
             // 
-            btnAumentarI40.Location = new Point(750, 534);
-            btnAumentarI40.Name = "btnAumentarI40";
-            btnAumentarI40.Size = new Size(130, 25);
-            btnAumentarI40.TabIndex = 22;
-            btnAumentarI40.Text = "Aumentar I 40%";
-            btnAumentarI40.UseVisualStyleBackColor = true;
-            btnAumentarI40.Click += btnAumentarI40_Click;
-            // 
-            // btnAumentarHue30
-            // 
-            btnAumentarHue30.Location = new Point(750, 563);
-            btnAumentarHue30.Name = "btnAumentarHue30";
+            btnAumentarHue30.Location = new Point(750, 534);
+            btnAumentarHue30.Name = "btnAumentaHue30";
             btnAumentarHue30.Size = new Size(130, 25);
-            btnAumentarHue30.TabIndex = 23;
-            btnAumentarHue30.Text = "Aumentar Hue 30°";
+            btnAumentarHue30.TabIndex = 22;
+            btnAumentarHue30.Text = "Aumentar H 30º";
             btnAumentarHue30.UseVisualStyleBackColor = true;
             btnAumentarHue30.Click += btnAumentarHue30_Click;
+            // 
+            // btnDiminuirH30
+            // 
+            btnDiminuirHue30.Location = new Point(750, 563);
+            btnDiminuirHue30.Name = "btnDiminuirHue30";
+            btnDiminuirHue30.Size = new Size(130, 25);
+            btnDiminuirHue30.TabIndex = 23;
+            btnDiminuirHue30.Text = "Diminuir H 30°";
+            btnDiminuirHue30.UseVisualStyleBackColor = true;
+            btnDiminuirHue30.Click += btnDiminuirHue30_Click;
             // 
             // btnSegHUE
             // 
@@ -285,8 +285,8 @@
             Controls.Add(btnAbirImg);
             Controls.Add(pictureBoxDestino);
             Controls.Add(pictureBoxOrigem);
-            Controls.Add(btnAumentarI40);
             Controls.Add(btnAumentarHue30);
+            Controls.Add(btnDiminuirHue30);
             Name = "FormPrincipal";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrigem).EndInit();
@@ -317,8 +317,8 @@
         private Button btDiminuiI;
         private Button btAumentaI;
         private Label label3;
-        private Button btnAumentarI40;
         private Button btnAumentarHue30;
+        private Button btnDiminuirHue30;
         private Button btnSegHUE;
         private NumericUpDown numericUpDownHue;
         private NumericUpDown numericUpDownHue2;
