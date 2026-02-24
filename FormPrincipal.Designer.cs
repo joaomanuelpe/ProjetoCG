@@ -244,7 +244,16 @@
             btnSegHUE.Text = "Segmentar HUE";
             btnSegHUE.UseVisualStyleBackColor = true;
             btnSegHUE.Click += btnSegHUE_Click;
-            // 
+            //
+            //btnCriaMiniatura
+            //
+            btnMiniaturasHSI = new Button();
+            btnMiniaturasHSI.Location = new Point(1030, 534);
+            btnMiniaturasHSI.Size = new Size(120, 23);
+            btnMiniaturasHSI.Text = "Miniaturas HSI";
+            btnMiniaturasHSI.Click += btnMiniaturasHSI_Click;
+            Controls.Add(btnMiniaturasHSI);
+            //
             // numericUpDownHue
             // 
             numericUpDownHue.Location = new Point(899, 537);
@@ -320,6 +329,7 @@
         private Button btnAumentarHue30;
         private Button btnDiminuirHue30;
         private Button btnSegHUE;
+        private Button btnMiniaturasHSI;
         private NumericUpDown numericUpDownHue;
         private NumericUpDown numericUpDownHue2;
     }

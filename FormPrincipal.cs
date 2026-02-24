@@ -129,5 +129,16 @@ namespace ProjCG
                 pictureBoxOrigem.Image = Filtros.SegmentarHUE(imgOrigem, num, num2, imagemHSI);
             }
         }
+        
+        private void btnMiniaturasHSI_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxOrigem.Image != null)
+            {
+                Bitmap imgOrigem = (Bitmap)pictureBoxOrigem.Image;
+                pictureBoxDestino.Image = Filtros.MiniaturaHSI(imgOrigem, imagemHSI);
+                pictureBoxDestino.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+        }
+        
     }
 }

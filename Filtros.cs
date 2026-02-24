@@ -395,5 +395,30 @@ namespace ProjCG
             imgDest.UnlockBits(bitmapDataDst);
             return imgDest;
         }
+
+        public static Image MiniaturaHSI(Bitmap imagemOriginal, HSI[][] imagemHSI)
+        {
+            Bitmap imgH = (Bitmap)CanalH(imagemOriginal, imagemHSI);
+            Bitmap imgS = (Bitmap)CanalS(imagemOriginal, imagemHSI);
+            Bitmap imgI = (Bitmap)CanalI(imagemOriginal, imagemHSI);
+
+            int larguraMini = imagemOriginal.Width / 3;
+            int alturaMini = imagemOriginal.Height / 3;
+
+            Bitmap miniH = new Bitmap(imgH, new Size(larguraMini, alturaMini));
+            Bitmap miniS = new Bitmap(imgS, new Size(larguraMini, alturaMini));
+            Bitmap miniI = new Bitmap(imgI, new Size(larguraMini, alturaMini));
+
+            Bitmap resultado = new Bitmap(larguraMini * 3, alturaMini);
+
+            using (Graphics g = Graphics.FromImage(resultado))
+            {
+                g.DrawImage(miniH, 0, 0);
+                g.DrawImage(miniS, larguraMini, 0);
+                g.DrawImage(miniI, larguraMini * 2, 0);
+            }
+
+            return resultado;
+        }
     }
 }
