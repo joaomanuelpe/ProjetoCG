@@ -257,7 +257,6 @@ namespace ProjCG
                             if (pixelH >= hue1 || pixelH <= hue2)
                                 manterColorido = true;
                         }
-                                
 
                         //Aqui vai ver se faz a luminancia ou matem a cor
                         if (manterColorido)
@@ -270,9 +269,9 @@ namespace ProjCG
                         { 
                             byte cinza = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
 
-                            *(dst++) = cinza; // B
-                            *(dst++) = cinza; // G
-                            *(dst++) = cinza; // R
+                            *(dst++) = cinza;
+                            *(dst++) = cinza;
+                            *(dst++) = cinza;
                         }
                     }
                 }
